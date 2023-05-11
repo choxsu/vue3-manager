@@ -1,5 +1,5 @@
 {
-  "name": "pure-admin-thin",
+  "name": "vue3-manager",
   "version": "3.9.7",
   "private": true,
   "scripts": {
@@ -118,7 +118,5 @@
       ]
     }
   },
-  "repository": "git@github.com:pure-admin/pure-admin-thin.git",
-  "author": "xiaoxian521",
   "license": "MIT"
 }
