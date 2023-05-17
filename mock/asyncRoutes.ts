@@ -16,18 +16,74 @@ const permissionRouter = {
   },
   children: [
     {
-      path: "/permission/page/index",
+      path: "/permission/page",
+      component: "/permission/page/index",
       name: "PermissionPage",
       meta: {
         title: "页面权限",
+        icon: "lollipop",
         roles: ["admin", "common"]
       }
     },
     {
-      path: "/permission/button/index",
+      path: "/permission/button",
+      component: "/permission/button/index",
       name: "PermissionButton",
       meta: {
         title: "按钮权限",
+        icon: "lollipop",
+        roles: ["admin", "common"],
+        auths: ["btn_add", "btn_edit", "btn_delete"]
+      }
+    }
+  ]
+};
+const mulMenuRouter = {
+  path: "/mulMenu",
+  meta: {
+    title: "多菜单测试",
+    icon: "lollipop",
+    rank: 10
+  },
+  children: [
+    {
+      path: "/mulMenu/one",
+      name: "MulMenuOne",
+      meta: {
+        title: "菜单1",
+        icon: "lollipop",
+        roles: ["admin", "common"]
+      },
+      children: [
+        {
+          path: "/mulMenu/one/page1",
+          component: "/permission/page/index",
+          name: "MulMenuOnePage1",
+          meta: {
+            title: "子菜单1",
+            icon: "lollipop",
+            roles: ["admin", "common"]
+          }
+        },
+        {
+          path: "/mulMenu/one/page2",
+          component: "/permission/page/index",
+          name: "MulMenuOnePage2",
+          meta: {
+            title: "子菜单2",
+            icon: "lollipop",
+            roles: ["admin", "common"]
+          }
+        }
+      ]
+    },
+    {
+      path: "/mulMenu/two",
+      component: "/permission/button/index",
+      name: "MulMenuTwo",
+      meta: {
+        title: "菜单2",
+        icon: "lollipop",
         roles: ["admin", "common"],
         auths: ["btn_add", "btn_edit", "btn_delete"]
       }
@@ -42,7 +98,7 @@ export default [
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: [permissionRouter, mulMenuRouter]
       };
     }
   }
