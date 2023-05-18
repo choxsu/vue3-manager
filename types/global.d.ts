@@ -60,6 +60,7 @@ declare global {
    */
   interface ViteEnv {
     VITE_PORT: number;
+    VITE_HOST: string;
     VITE_PUBLIC_PATH: string;
     VITE_ROUTER_HISTORY: string;
     VITE_CDN: boolean;
@@ -69,7 +70,7 @@ declare global {
   /**
    *  继承 `@pureadmin/table` 的 `TableColumns` ，方便全局直接调用
    */
-  interface TableColumnList extends Array<TableColumns> {}
+  interface TableColumnList extends Array<TableColumns> { }
 
   /**
    * 对应 `public/serverConfig.json` 文件的类型声明
