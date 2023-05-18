@@ -44,10 +44,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       host: "0.0.0.0",
       // 本地跨域代理 https://cn.vitejs.dev/config/server-options.html#server-proxy
       proxy: {
-        "/api": {
+        // 带选项写法：http://localhost:5173/v1/bar -> http://jsonplaceholder.typicode.com/bar
+        "/v1": {
           target: `${VITE_HOST}`,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, "")
+          rewrite: path => path.replace(/^\/v1/, "")
         }
       }
     },
