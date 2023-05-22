@@ -1,7 +1,13 @@
 import { http } from "@/utils/http";
 
+export type CommonResult = {
+  code: number;
+  msg: string;
+};
+
 export type UserResult = {
-  success: boolean;
+  code: number;
+  msg: string;
   data: {
     /** 用户名 */
     username: string;
@@ -17,7 +23,8 @@ export type UserResult = {
 };
 
 export type RefreshTokenResult = {
-  success: boolean;
+  code: number;
+  msg: string;
   data: {
     /** `token` */
     accessToken: string;

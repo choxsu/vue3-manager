@@ -194,6 +194,7 @@ function handleAsyncRoutes(routeList) {
 /** 初始化路由（`new Promise` 写法防止在异步请求中造成无限循环）*/
 function initRouter() {
   if (getConfig()?.CachingAsyncRoutes) {
+    debugger;
     // 开启动态路由缓存本地sessionStorage
     const key = "async-routes";
     const asyncRouteList = storageSession().getItem(key) as any;
@@ -246,7 +247,9 @@ function formatFlatteningRoutes(routesList: RouteRecordRaw[]) {
  * @returns 返回将一维数组重新处理成规定路由的格式
  */
 function formatTwoStageRoutes(routesList: RouteRecordRaw[]) {
-  if (routesList.length === 0) return routesList;
+  if (routesList.length === 0) {
+    return routesList;
+  }
   const newRoutesList: RouteRecordRaw[] = [];
   routesList.forEach((v: RouteRecordRaw) => {
     if (v.path === "/") {

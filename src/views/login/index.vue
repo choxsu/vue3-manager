@@ -32,9 +32,13 @@ const { dataTheme, dataThemeChange } = useDataThemeChange();
 dataThemeChange();
 const { title } = useNav();
 
+const captchaData = ref("");
+
 const ruleForm = reactive({
-  username: "",
-  password: ""
+  email: "",
+  password: "",
+  captcha: "",
+  captcha_id: ""
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
@@ -44,16 +48,23 @@ const onLogin = async (formEl: FormInstance | undefined) => {
     if (valid) {
       useUserStoreHook()
         .loginByUsername({
-          username: ruleForm.username,
-          passwor: ruleForm.password
+          email: ruleForm.email,
+          password: ruleForm.password,
+          captcha: ruleForm.captcha,
+          captcha_id: ruleForm.captcha_id
         })
         .then(res => {
-          if (res.success) {
+          if (res.code === 200) {
+            setToken(res.data.token);
             // 获取后端路由
             initRouter().then(() => {
               router.push("/");
               message("登录成功", { type: "success" });
             });
+          } else {
+            message(res.msg, { type: "error" });
+            loading.value = false;
+            return fields;
           }
         });
     } else {
@@ -118,11 +129,11 @@ onBeforeUnmount(() => {
                     trigger: 'blur'
                   }
                 ]"
-                prop="username"
+                prop="email"
               >
                 <el-input
                   clearable
-                  v-model="ruleForm.username"
+                  v-model="ruleForm.email"
                   placeholder="账号"
                   :prefix-icon="useRenderIcon(User)"
                 />
@@ -139,6 +150,18 @@ onBeforeUnmount(() => {
                   :prefix-icon="useRenderIcon(Lock)"
                 />
               </el-form-item>
+            </Motion>
+
+            <Motion :delay="150">
+              <el-form-item prop="captcha">
+                <el-input
+                  clearable
+                  v-model="ruleForm.captcha"
+                  placeholder="验证码"
+                  :prefix-icon="useRenderIcon(Lock)"
+                />
+              </el-form-item>
+              <el-image :src="captchaData" />
             </Motion>
 
             <Motion :delay="250">
