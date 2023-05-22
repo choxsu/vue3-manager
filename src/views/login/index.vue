@@ -55,7 +55,6 @@ const onLogin = async (formEl: FormInstance | undefined) => {
         })
         .then(res => {
           if (res.code === 200) {
-            setToken(res.data.token);
             // 获取后端路由
             initRouter().then(() => {
               router.push("/");
